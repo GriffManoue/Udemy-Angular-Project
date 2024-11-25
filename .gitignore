@@ -483,3 +483,33 @@ $RECYCLE.BIN/
 # Vim temporary swap files
 *.swp
 API/appsettings.json
+
+# Angular
+/dist
+/tmp
+/out-tsc
+/bazel-out
+.angular
+
+# SSL Development certificates
+*.pem
+*.crt
+*.key
+*.pfx
+
+# Environment Files
+.env
+.env.*
+!.env.example
+appsettings.json
+appsettings.*.json
+!appsettings.example.json
+
+# SQLite database files
+*.db
+*.db-shm
+*.db-wal
+
+# .NET Development
+*.Development.json
+**/Properties/launchSettings.json
