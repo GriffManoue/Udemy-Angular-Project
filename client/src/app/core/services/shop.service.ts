@@ -43,6 +43,11 @@ export class ShopService {
       .pipe(catchError(error => {console.error(error); return [];}));
   }
 
+  getProduct(id: number) {
+    return this.http.get<Product>(this.baseUrl + 'products/' + id);
+  }
+
+
   getBrands() {
     if(this.brands.length>0) return;
     return this.http.get<string[]>(this.baseUrl + 'products/brands').subscribe({
