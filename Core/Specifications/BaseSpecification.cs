@@ -15,20 +15,20 @@ public class BaseSpecification<T>(Expression<Func<T, bool>>? criteria) : ISpecif
 
     public bool IsDistinct { get; private set; }
 
-    public int Take {get; private set;}
+    public int Take { get; private set; }
 
-    public int Skip {get; private set;}
+    public int Skip { get; private set; }
 
-    public bool IsPagingEnabled {get; private set;}
+    public bool IsPagingEnabled { get; private set; }
 
     public IQueryable<T> ApplyCriteria(IQueryable<T> query)
     {
-       if (Criteria != null)
-       {
-           query = query.Where(Criteria);
-       }
+        if (Criteria != null)
+        {
+            query = query.Where(Criteria);
+        }
 
-       return query;
+        return query;
     }
 
     protected void AddOrderBy(Expression<Func<T, object>> orderByExpression)

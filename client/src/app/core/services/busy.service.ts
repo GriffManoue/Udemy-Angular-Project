@@ -4,10 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class BusyService {
-
   loading = false;
   busyRequestCount = 0;
-  
+
   busy() {
     this.busyRequestCount++;
     this.loading = true;

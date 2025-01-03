@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-filters-dialog',
+  standalone: true,
   imports: [
     MatDivider,
     MatSelectionList,
@@ -19,7 +20,6 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './filters-dialog.component.scss'
 })
 export class FiltersDialogComponent {
-
   shopService = inject(ShopService);
   private dialogRef = inject(MatDialogRef<FiltersDialogComponent>);
   data = inject(MAT_DIALOG_DATA);
@@ -27,12 +27,11 @@ export class FiltersDialogComponent {
   selectedBrands: string[] = this.data.selectedBrands;
   selectedTypes: string[] = this.data.selectedTypes;
 
-  applyFilters(){
+  applyFilters() {
     this.dialogRef.close({
       selectedBrands: this.selectedBrands,
       selectedTypes: this.selectedTypes
-    });
+    })
   }
-
 
 }

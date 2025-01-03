@@ -14,7 +14,7 @@ services:
       - "6379:6379"
     volumes:
       - redis-data:/data
+
 volumes:
-  sql-data:
   redis-data:
-  
+  sql-data:

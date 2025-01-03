@@ -17,23 +17,14 @@ builder.Services.AddDbContext<StoreContext>(opt =>
 });
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-builder.Services.AddCors(options =>
+builder.Services.AddCors();
+builder.Services.AddSingleton<IConnectionMultiplexer>(config => 
 {
-    options.AddPolicy("CorsPolicy", policy =>
-    {
-        policy.AllowAnyHeader()
-              .AllowAnyMethod()
-              .WithOrigins("https://localhost:4200", "http://localhost:4200", "https://172.29.80.1:4200");
-    });
-});
-
-builder.Services.AddSingleton<IConnectionMultiplexer>(config =>
-{
-    var connectionString = builder.Configuration.GetConnectionString("Redis") ?? throw new Exception("Redis connection string is missing");
-    var configuration = ConfigurationOptions.Parse(connectionString, true);
+    var connString = builder.Configuration.GetConnectionString("Redis") 
+        ?? throw new Exception("Cannot get redis connection string");
+    var configuration = ConfigurationOptions.Parse(connString, true);
     return ConnectionMultiplexer.Connect(configuration);
 });
-
 builder.Services.AddSingleton<ICartService, CartService>();
 
 var app = builder.Build();
@@ -41,7 +32,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 app.UseMiddleware<ExceptionMiddleware>();
 
-app.UseCors("CorsPolicy");
+app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod()
+    .WithOrigins("http://localhost:4200","https://localhost:4200"));
 
 app.MapControllers();
 

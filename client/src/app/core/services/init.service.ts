@@ -8,11 +8,12 @@ import { of } from 'rxjs';
 export class InitService {
   private cartService = inject(CartService);
 
-  init(){
+  init() {
     const cartId = localStorage.getItem('cart_id');
     const cart$ = cartId ? this.cartService.getCart(cartId) : of(null);
 
     return cart$;
   }
-  
+
+
 }
